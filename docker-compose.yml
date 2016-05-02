@@ -1,0 +1,15 @@
+reddit:
+  build: ./reddit
+  ports:
+    - "8081:8081"
+  links:
+    - cassandra
+
+cassandra:
+  build: ./cassandra
+  ports:
+    - "7000:7000"
+    - "7001:7001"
+    - "9160:9160"
+    - "9042:9042"
+    - "7199:7199"
