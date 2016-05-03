@@ -1,0 +1,31 @@
+{
+  "pools": {
+    "local": {
+      "servers": [
+        "memcached:11211"
+      ],
+      "protocol": "ascii",
+      "keep_routing_prefix": false
+    }
+  },
+  "route": {
+    "type": "PrefixSelectorRoute",
+    "policies": {
+      "rend:": {
+        "type": "PoolRoute",
+        "pool": "local"
+      },
+      "page:": {
+        "type": "PoolRoute",
+        "pool": "local"
+      },
+      "pane:": {
+        "type": "PoolRoute",
+        "pool": "local"
+      }
+    },
+    "wildcard": {
+      "type": "NullRoute"
+    }
+  }
+}

@@ -1,9 +1,23 @@
 reddit:
-  build: ./reddit
+    build: ./reddit
+    ports:
+      - "8081:8081"
+    links:
+      - mcrouter
+      - memcached
+      - cassandra
+
+mcrouter:
+  build: ./mcrouter
   ports:
-    - "8081:8081"
+    - "5000:5000"
   links:
-    - cassandra
+    - memcached
+
+memcached:
+  build: ./memcached
+  ports:
+    - "11211:11211"
 
 cassandra:
   build: ./cassandra

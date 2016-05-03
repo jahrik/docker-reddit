@@ -6,7 +6,6 @@
 
   1. Compose.io PostgreSQL
   1. CloudAMQP
-  1. Memcached Cloud
   
 ## Configuring Databases
 
@@ -21,6 +20,7 @@ we're going to create a table named `reddit`:
 
 ```PLpgSQL
 CREATE DATABASE reddit OWNER admin
+CREATE USER reddit WITH PASSWORD 'password';
 ```
 
 Note that you don't *need* to do this - you can configure your
@@ -59,13 +59,39 @@ CREATE FUNCTION
 
 ### Configuring RabbitMQ
 
+```shell
+➜ sudo rabbitmqctl add_vhost /
+➜ sudo rabbitmqctl add_user reddit reddit
+➜ sudo rabbitmqctl set_permissions -p / reddit ".*" ".*" ".*"
+```
+
+### Configuring Mcrouter
+
+This is done for you! Via magical docker compose!
+
 ### Configuring Memcached
 
-## Building
+This is done for you! Via magical docker compose!
 
-Once everything is configured, create your `myreddit.update` file, and
-run `docker-compose build`
+## Building + Running
 
-## Running
+Make sure that you map `reddit.local` to your docker-machine's IP
 
-`docker-compose up`
+If running locally, make sure to give your docker-machine an obscene
+amount of memory because the reddit stack is insane:
+
+```shell
+docker-machine create -d virtualbox --virtualbox-memory 4096 reddit
+```
+
+Once everything is configured, create your `myreddit.update` file:
+
+```shell
+docker-compose build
+```
+
+Then to run it:
+
+```shell
+docker-compose up
+```
