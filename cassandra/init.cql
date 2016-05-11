@@ -1,8 +1,8 @@
-CREATE KEYSPACE IF NOT EXISTS reddit
+CREATE KEYSPACE reddit
   WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': 1};
 
 USE reddit;
 
-CREATE COLUMNFAMILY IF NOT EXISTS permacache (
+CREATE COLUMNFAMILY permacache (
   k int PRIMARY KEY
 );
