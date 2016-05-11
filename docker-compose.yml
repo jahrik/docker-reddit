@@ -5,6 +5,7 @@ reddit:
     links:
       - mcrouter
       - memcached
+      - rabbitmq
       - cassandra
 
 mcrouter:
@@ -18,6 +19,11 @@ memcached:
   build: ./memcached
   ports:
     - "11211:11211"
+
+rabbitmq:
+  build: ./rabbitmq
+  ports:
+    - "5672:5672"
 
 cassandra:
   build: ./cassandra

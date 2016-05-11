@@ -15,6 +15,10 @@ This is done for you! Via magical docker compose!
 
 ### Configuring PostgreSQL
 
+```shell
+➜ brew install postgresql
+```
+
 Once our cloud hosted instance of PostgreSQL is running in compose,
 we're going to create a table named `reddit`:
 
@@ -59,11 +63,7 @@ CREATE FUNCTION
 
 ### Configuring RabbitMQ
 
-```shell
-➜ sudo rabbitmqctl add_vhost /
-➜ sudo rabbitmqctl add_user reddit reddit
-➜ sudo rabbitmqctl set_permissions -p / reddit ".*" ".*" ".*"
-```
+This is done for you! Via magical docker compose!
 
 ### Configuring Mcrouter
 
