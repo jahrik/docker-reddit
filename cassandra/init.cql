@@ -4,5 +4,5 @@ CREATE KEYSPACE IF NOT EXISTS reddit
 USE reddit;
 
 CREATE COLUMNFAMILY IF NOT EXISTS permacache (
-  k int PRIMARY KEY
+  k text PRIMARY KEY
 );
