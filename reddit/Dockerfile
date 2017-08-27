@@ -1,9 +1,6 @@
 FROM ubuntu:14.04
 ENV DEBIAN_FRONTEND noninteractive
 
-# get the reddit source and put the install config and the correct spot
-COPY reddit-source /reddit
-
 # install dependencies not covered from install_apt.sh
 RUN apt-get update
 RUN apt-get install -y \
@@ -11,7 +8,14 @@ RUN apt-get install -y \
   wget \
   software-properties-common \
   python-software-properties \
+  python-pip\
   postgresql
+
+RUN add-apt-repository ppa:reddit/ppa && \
+    apt-get update
+
+# get the reddit source and put the install config and the correct spot
+COPY reddit-source /reddit
 
 # Use script as defined in reddit source
 COPY reddit-source/install/install.cfg /bin/install.cfg
