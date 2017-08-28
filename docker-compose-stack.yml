@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  reddit:
+    build: ./reddit
+    ports:
+      - "8081:8081"
+    links:
+      - mcrouter
+      - memcached
+      - rabbitmq
+      - cassandra
+
+  mcrouter:
+    build: ./mcrouter
+    ports:
+      - "5000:5000"
+    links:
+      - memcached
+
+  memcached:
+    build: ./memcached
+    ports:
+      - "11211:11211"
+
+  rabbitmq:
+    build: ./rabbitmq
+    ports:
+      - "5672:5672"
+
+  cassandra:
+    build: ./cassandra
+    # image: dockerreddit_cassandra
+    ports:
+      - "7000:7000"
+      - "7001:7001"
+      - "9160:9160"
+      - "9042:9042"
+      - "7199:7199"
