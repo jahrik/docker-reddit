@@ -1,18 +1,46 @@
 FROM ubuntu:14.04
 ENV DEBIAN_FRONTEND noninteractive
 
-# install dependencies not covered from install_apt.sh
+# https://github.com/reddit/reddit/wiki/Install-guide
+# https://github.com/reddit/reddit/wiki/Dependencies
+
+# Base deps
 RUN apt-get update
 RUN apt-get install -y \
   sudo \
   wget \
   software-properties-common \
   python-software-properties \
-  python-pip\
-  postgresql
+  postgresql \
+  postgresql-client \
+  python-pip \
+  python-setuptools \
+  python-dev \
+  libmemcached-dev \
+  libpq-dev \
+  libxml2-dev \
+  libxslt1-dev \
+  python-imaging \
+  git-core \
+  gcc \
+  optipng \
+  jpegoptim \
+  make \
+  gettext
 
-RUN add-apt-repository ppa:reddit/ppa && \
-    apt-get update
+# Reddit ppa deps
+RUN add-apt-repository ppa:reddit/ppa
+RUN apt-get update
+RUN apt-get install -y \
+  nodejs \
+  node-less \
+  node-uglify
+
+# Node deps
+# Attempt at fixing:
+# Error: Cannot find module 'less'
+# Error: Cannot find module 'uglify-js'
+RUN npm install less uglify-js
 
 # get the reddit source and put the install config and the correct spot
 COPY reddit-source /reddit
